@@ -5,7 +5,9 @@ import cors from "cors";
 
 const app = express();
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI);
+
+app.get("/customers")
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
