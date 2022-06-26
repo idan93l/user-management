@@ -1,15 +1,27 @@
 import 'dotenv/config'
-import Express from "express";
-import mongoose from "mongoose";
+import express from "express";
 import cors from "cors";
-
-const app = Express();
+import mongoose from "mongoose";
+import userRoutes from "./routes/routes.js"
 
 const uri = process.env.MONGODB_URI
+const app = express();
 
-mongoose.connect(uri, () => console.log("connected to mondo gb"));
+app.use(cors());
+app.use(express.json());
+app.use(userRoutes)
 
-app.get("/customers")
+mongoose.connect(uri, () => console.log("connected to mongoDB"));
+
+// app.get("/getUsers", async (req, res) => {
+//   try {
+//     const data = await UserModel.find()
+//     res.send(data);
+//   } catch (err) {
+//     console.log(err);
+//     res.send(err)
+//   }
+// })
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
