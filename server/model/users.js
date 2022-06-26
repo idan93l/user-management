@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
-const friendSchema = mongoose.Schema({
+const friendSchema = new mongoose.Schema({
   id: Number,
   name: String
 })
@@ -35,4 +35,4 @@ const userSchema = mongoose.Schema({
 
 const UserModel = mongoose.model("users", userSchema);
 
-export default UserModel;
+module.exports = UserModel;
