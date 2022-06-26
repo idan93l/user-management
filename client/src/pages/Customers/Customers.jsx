@@ -1,22 +1,15 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import User from "../../components/User/User";
 
 export default function Customers({ users }) {
-  const isActive = (activity) => {
-    if (activity === true) {
-      return "true";
-    } else {
-      return "false";
-    }
-  };
-
   return (
     <div>
       <TableContainer component = { Paper } sx = {{ maxHeight: '100vh' }}>
@@ -34,16 +27,10 @@ export default function Customers({ users }) {
           <TableBody>
             {users.map((user) => {
               return (
-                <TableRow key={user._id}>
-                  <TableCell>{isActive(user.isActive)}</TableCell>
-                  <TableCell>{user.name.first}</TableCell>
-                  <TableCell>{user.name.last}</TableCell>
-                  <TableCell>{user.company}</TableCell>
-                  <TableCell>{user.address}</TableCell>
-                  <TableCell>{user.age}</TableCell>
-                </TableRow>
+                <User key={user._id} user={user} />
               );
             })}
+            <Outlet/>
           </TableBody>
         </Table>
       </TableContainer>

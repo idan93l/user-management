@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Header({ users }) {
+export default function Header({ users, onChange }) {
   const activeUsersCount = (users) => {
     let counter = 0;
     users.forEach((user) => {
@@ -10,10 +11,14 @@ export default function Header({ users }) {
     });
     return counter;
   };
+
   return (
     <div>
       <h1>User Management</h1>
       <h2>{activeUsersCount(users)} Active users</h2>
+      <Link to={"/customers"}>
+        <h3>Show Users</h3>
+      </Link>
     </div>
   );
 }
