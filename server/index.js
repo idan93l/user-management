@@ -20,6 +20,10 @@ app.use(userRoutes);
 
 mongoose.connect(uri, () => console.log("connected to mongoDB"));
 
+app.use("*", (req, res) => {
+  res.sendFile(path.resolve(`${publicPath}/index.html`));
+});
+
 app.listen(PORT, () => {
   console.log(`server runs on port ${PORT}`);
 })
