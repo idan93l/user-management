@@ -1,24 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import Loader from "../../components/Loader/Loader";
+import ToTable from "../../components/buttons/ToTable/ToTable";
+import "./Header.css";
 
-export default function Header({ users, onChange }) {
-  const activeUsersCount = (users) => {
+export default function Header({ users }) {
+  const [userCount, setUserCount] = useState();
+  const activeUsersCount = () => {
     let counter = 0;
     users.forEach((user) => {
       if (user.isActive === true) {
         counter++;
       }
     });
-    return counter;
+    setUserCount(counter);
   };
+
+  useEffect(() => {
+    activeUsersCount();
+  });
 
   return (
     <div>
-      <h1>User Management</h1>
-      <h2>{activeUsersCount(users)} Active users</h2>
-      <Link to={"/customers"}>
-        <h3>Show Users</h3>
-      </Link>
+      {!userCount ? (
+        <Loader />
+      ) : (
+        <div className="Header">
+          <div className="container">
+            <div className="head">User Management</div>
+            <div className="subHead">{userCount} Active users</div>
+            <ToTable />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
